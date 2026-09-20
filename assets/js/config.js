@@ -50,7 +50,7 @@ window.SAND_WHALE_CONFIG = {
       id: 'market',
       title: '감자 마켓',
       desc: '모래고래 공식 굿즈 및 마켓 둘러보기',
-      url: 'https://gatsxneider.github.io/MyLink/',
+      url: 'https://gamja-two.vercel.app/',
       icon: 'assets/images/market_2d.jpg',
       alt: '귀여운 2D 감자 마켓 쇼핑카트 아이콘'
     }
