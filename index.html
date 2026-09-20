@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- 보안 설정 (Security Policy) -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    img-src 'self' data:;
+    style-src 'self' 'unsafe-inline';
+    script-src 'self';
+    font-src 'self';
+    connect-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+
+  <title>모래고래 | Sand Whale</title>
+  <meta name="description" content="모래고래의 공식 링크 모음 페이지입니다. 지금부터 시작!">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <main class="page-container" role="main">
+    
+    <!-- 1. 프로필 영역 (순서: 프로필 이미지 -> 이름 -> 한줄 소개) -->
+    <header class="profile-section" aria-label="프로필 정보">
+      
+      <!-- [1] 프로필 이미지 (3개 이미지 부드러운 전환) -->
+      <div class="profile-avatar-frame" title="클릭하면 다음 이미지로 전환됩니다" role="region" aria-label="모래고래 프로필 사진 슬라이더">
+        <div class="profile-slider" id="profileSlider">
+          <img src="assets/images/sand_whale_1.jpg" alt="귀여운 2D 모래고래 캐릭터 1 - 따뜻한 노을 사막" class="profile-slide active" id="slide-0">
+          <img src="assets/images/sand_whale_2.jpg" alt="귀여운 2D 모래고래 캐릭터 2 - 은하수 밤하늘 별빛" class="profile-slide" id="slide-1">
+          <img src="assets/images/sand_whale_3.jpg" alt="귀여운 2D 모래고래 캐릭터 3 - 오아시스 크리스탈" class="profile-slide" id="slide-2">
+        </div>
+      </div>
+
+      <!-- 슬라이드 인디케이터 (3개 점) -->
+      <div class="profile-indicators" role="tablist" aria-label="프로필 이미지 선택">
+        <button type="button" class="indicator-dot active" data-index="0" role="tab" aria-selected="true" aria-label="1번째 이미지 보기"></button>
+        <button type="button" class="indicator-dot" data-index="1" role="tab" aria-selected="false" aria-label="2번째 이미지 보기"></button>
+        <button type="button" class="indicator-dot" data-index="2" role="tab" aria-selected="false" aria-label="3번째 이미지 보기"></button>
+      </div>
+
+      <!-- [2] 이름 -->
+      <h1 class="profile-name">
+        모래고래
+        <span class="badge-symbol" title="인증">✦</span>
+      </h1>
+
+      <!-- [3] 한줄 소개 -->
+      <p class="profile-bio">
+        지금부터 시작
+      </p>
+
+    </header>
+
+    <!-- 2. 링크 목록 영역 (세로 배치: 대표이미지, 설명문구, 부가정보) -->
+    <section class="links-section" id="linksContainer" aria-label="공식 링크 목록">
+      
+      <!-- 메일 링크 카드 -->
+      <a href="mailto:gats.xneider@gmail.com" class="link-card" id="link-mail">
+        <div class="link-thumb-wrapper">
+          <img src="assets/images/mail_2d.jpg" alt="귀여운 2D 메일 편지봉투 아이콘" class="link-thumb">
+        </div>
+        <div class="link-content">
+          <div class="link-title">메일 문의</div>
+          <div class="link-description">비즈니스 협업 및 문의 메일 보내기</div>
+        </div>
+        <div class="link-arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </a>
+
+      <!-- 유튜브 링크 카드 -->
+      <a href="https://www.youtube.com/@watergom" class="link-card" id="link-youtube" target="_blank" rel="noopener noreferrer">
+        <div class="link-thumb-wrapper">
+          <img src="assets/images/youtube_2d.jpg" alt="귀여운 2D 유튜브 재생 아이콘" class="link-thumb">
+        </div>
+        <div class="link-content">
+          <div class="link-title">유튜브 (YouTube)</div>
+          <div class="link-description">모래고래 공식 채널 및 영상 콘텐츠</div>
+        </div>
+        <div class="link-arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </a>
+
+      <!-- 인스타그램 링크 카드 -->
+      <a href="https://www.instagram.com/watergom2" class="link-card" id="link-instagram" target="_blank" rel="noopener noreferrer">
+        <div class="link-thumb-wrapper">
+          <img src="assets/images/instagram_2d.jpg" alt="귀여운 2D 인스타그램 카메라 아이콘" class="link-thumb">
+        </div>
+        <div class="link-content">
+          <div class="link-title">인스타그램 (Instagram)</div>
+          <div class="link-description">일상 이야기와 사진 및 최신 소식</div>
+        </div>
+        <div class="link-arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </a>
+
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="page-footer">
+      <p>© 2026 <span>모래고래</span>. All rights reserved.</p>
+    </footer>
+
+  </main>
+
+  <!-- 최신 소식 알림 팝업 모달 -->
+  <div id="newsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button type="button" class="modal-x-btn" id="modalCloseIconBtn" aria-label="팝업 닫기">&times;</button>
+      <div class="modal-badge">
+        <span class="modal-badge-icon">✨</span> 환영합니다
+      </div>
+      <h2 id="modalTitle" class="modal-title">모래고래를 찾아오신 걸 환영합니다</h2>
+      <p class="modal-description">모래고래의 공식 채널과 소식을 한곳에서 만나보세요!</p>
+      <div class="modal-actions">
+        <button type="button" class="modal-close-btn" id="modalCloseBtn">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 미등록 링크 클릭 시 안내 토스트 모달 -->
+  <div id="toastNotice" class="toast-notice" role="status" aria-live="polite" aria-hidden="true">
+    <span class="toast-icon">ℹ️</span>
+    <span id="toastMessage">아직 링크 주소가 등록되지 않았습니다.</span>
+  </div>
+
+  <!-- JavaScript Config & Logic -->
+  <script src="assets/js/config.js?v=20260909"></script>
+  <script src="assets/js/main.js?v=20260909"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <defs>
+    <linearGradient id="ytBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff0000" />
+      <stop offset="50%" stop-color="#e60000" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+    <radialGradient id="ytGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <!-- Rounded Base -->
+  <rect width="80" height="80" rx="22" fill="url(#ytBg)" />
+  <rect width="78" height="78" x="1" y="1" rx="21" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+  <circle cx="40" cy="40" r="30" fill="url(#ytGlow)" />
+  
+  <!-- YouTube Screen Shape -->
+  <g transform="translate(16, 23)">
+    <path d="M46.7 5.2C46.1 3.1 44.5 1.5 42.4 0.9C38.7 0 24 0 24 0C24 0 9.3 0 5.6 0.9C3.5 1.5 1.9 3.1 1.3 5.2C0.3 8.9 0 16.5 0 16.5C0 16.5 0.3 24.1 1.3 27.8C1.9 29.9 3.5 31.5 5.6 32.1C9.3 33 24 33 24 33C24 33 38.7 33 42.4 32.1C44.5 31.5 46.1 29.9 46.7 27.8C47.7 24.1 48 16.5 48 16.5C48 16.5 47.7 8.9 46.7 5.2Z" 
+          fill="#ffffff" />
+    <!-- Red Play Triangle -->
+    <path d="M19 23.5L31.5 16.5L19 9.5V23.5Z" fill="#e60000" />
+  </g>
+</svg>
