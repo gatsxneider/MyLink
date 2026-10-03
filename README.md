@@ -43,6 +43,26 @@ window.SAND_WHALE_CONFIG = {
   },
   groups: [
     {
+      id: 'products',
+      title: 'Products',
+      links: [
+        {
+          id: 'cozy-book-club',
+          title: '코지 독서 클럽',
+          desc: '다정한 사람들의 온기 있는 서재 및 독서 모임',
+          url: 'https://bookclub-liard-one.vercel.app/',
+          icon: 'assets/images/book_2d.jpg'
+        },
+        {
+          id: 'market',
+          title: '감자 마켓',
+          desc: '모래고래 공식 굿즈 및 마켓 둘러보기',
+          url: 'https://gamja-two.vercel.app/',
+          icon: 'assets/images/market_2d.jpg'
+        }
+      ]
+    },
+    {
       id: 'personal',
       title: 'Personal',
       links: [
@@ -66,26 +86,6 @@ window.SAND_WHALE_CONFIG = {
           desc: '일상 이야기와 사진 및 최신 소식',
           url: 'https://www.instagram.com/watergom2',
           icon: 'assets/images/instagram_2d.jpg'
-        }
-      ]
-    },
-    {
-      id: 'products',
-      title: 'Products',
-      links: [
-        {
-          id: 'cozy-book-club',
-          title: '코지 독서 클럽',
-          desc: '다정한 사람들의 온기 있는 서재 및 독서 모임',
-          url: 'https://bookclub-liard-one.vercel.app/',
-          icon: 'assets/images/book_2d.jpg'
-        },
-        {
-          id: 'market',
-          title: '감자 마켓',
-          desc: '모래고래 공식 굿즈 및 마켓 둘러보기',
-          url: 'https://gamja-two.vercel.app/',
-          icon: 'assets/images/market_2d.jpg'
         }
       ]
     }

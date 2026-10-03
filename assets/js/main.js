@@ -18,6 +18,28 @@
     },
     groups: [
       {
+        id: 'products',
+        title: 'Products',
+        links: [
+          {
+            id: 'cozy-book-club',
+            title: '코지 독서 클럽',
+            desc: '다정한 사람들의 온기 있는 서재 및 독서 모임',
+            url: '',
+            icon: 'assets/images/book_2d.jpg',
+            alt: '귀여운 2D 코지 독서 클럽 책과 찻잔 아이콘'
+          },
+          {
+            id: 'market',
+            title: '감자 마켓',
+            desc: '모래고래 공식 굿즈 및 마켓 둘러보기',
+            url: '',
+            icon: 'assets/images/market_2d.jpg',
+            alt: '귀여운 2D 감자 마켓 쇼핑카트 아이콘'
+          }
+        ]
+      },
+      {
         id: 'personal',
         title: 'Personal',
         links: [
@@ -44,20 +66,6 @@
             url: '',
             icon: 'assets/images/instagram_2d.jpg',
             alt: '귀여운 2D 인스타그램 카메라 아이콘'
-          }
-        ]
-      },
-      {
-        id: 'products',
-        title: 'Products',
-        links: [
-          {
-            id: 'market',
-            title: '감자 마켓',
-            desc: '모래고래 공식 굿즈 및 마켓 둘러보기',
-            url: '',
-            icon: 'assets/images/market_2d.jpg',
-            alt: '귀여운 2D 감자 마켓 쇼핑카트 아이콘'
           }
         ]
       }
