@@ -227,13 +227,51 @@ body::after {
 }
 
 /* ==========================================================================
-   LINKS SECTION
+   LINKS SECTION & GROUPS (Personal, Products)
    ========================================================================== */
 .links-section {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1.75rem;
+}
+
+/* Link Group Container */
+.link-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Group Header Badge */
+.group-header {
+  display: flex;
+  align-items: center;
+  padding: 0 0.35rem;
+}
+
+.group-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-sky-deep);
+  background: rgba(224, 242, 254, 0.8);
+  border: 1px solid rgba(125, 211, 252, 0.6);
+  padding: 0.25rem 0.85rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(125, 211, 252, 0.15);
+}
+
+/* Group Cards List */
+.group-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  width: 100%;
 }
 
 /* Individual Link Card - White base, rounded, soft floating shadow */

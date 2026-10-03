@@ -1,6 +1,7 @@
 /**
  * Sand Whale (모래고래) - Link Collection Main Logic
  * - Profile Image Smooth Cross-fade Animation & Indicators
+ * - Grouped Links Rendering (Personal, Products) with Cute Pastel UI
  * - Security: XSS Sanitization, Safe Protocol Whitelist (http, https, mailto), Tabnabbing Prevention
  * - Interactive Feedback: Toast message when link URL is not yet configured
  */
@@ -12,33 +13,53 @@
   const config = (window.SAND_WHALE_CONFIG || (typeof SAND_WHALE_CONFIG !== 'undefined' ? SAND_WHALE_CONFIG : null)) || {
     profile: {
       name: '모래고래',
-      bio: '지금부터 시작',
+      bio: '반갑습니다',
       intervalMs: 3500
     },
-    links: [
+    groups: [
       {
-        id: 'mail',
-        title: '메일 문의',
-        desc: '비즈니스 협업 및 문의 메일 보내기',
-        url: '',
-        icon: 'assets/images/mail_2d.jpg',
-        alt: '귀여운 2D 메일 편지봉투 아이콘'
+        id: 'personal',
+        title: 'Personal',
+        links: [
+          {
+            id: 'mail',
+            title: '메일 문의',
+            desc: '비즈니스 협업 및 문의 메일 보내기',
+            url: '',
+            icon: 'assets/images/mail_2d.jpg',
+            alt: '귀여운 2D 메일 편지봉투 아이콘'
+          },
+          {
+            id: 'youtube',
+            title: '유튜브 (YouTube)',
+            desc: '모래고래 공식 채널 및 영상 콘텐츠',
+            url: '',
+            icon: 'assets/images/youtube_2d.jpg',
+            alt: '귀여운 2D 유튜브 재생 아이콘'
+          },
+          {
+            id: 'instagram',
+            title: '인스타그램 (Instagram)',
+            desc: '일상 이야기와 사진 및 최신 소식',
+            url: '',
+            icon: 'assets/images/instagram_2d.jpg',
+            alt: '귀여운 2D 인스타그램 카메라 아이콘'
+          }
+        ]
       },
       {
-        id: 'youtube',
-        title: '유튜브 (YouTube)',
-        desc: '모래고래 공식 채널 및 영상 콘텐츠',
-        url: '',
-        icon: 'assets/images/youtube_2d.jpg',
-        alt: '귀여운 2D 유튜브 재생 아이콘'
-      },
-      {
-        id: 'instagram',
-        title: '인스타그램 (Instagram)',
-        desc: '일상 이야기와 사진 및 최신 소식',
-        url: '',
-        icon: 'assets/images/instagram_2d.jpg',
-        alt: '귀여운 2D 인스타그램 카메라 아이콘'
+        id: 'products',
+        title: 'Products',
+        links: [
+          {
+            id: 'market',
+            title: '감자 마켓',
+            desc: '모래고래 공식 굿즈 및 마켓 둘러보기',
+            url: '',
+            icon: 'assets/images/market_2d.jpg',
+            alt: '귀여운 2D 감자 마켓 쇼핑카트 아이콘'
+          }
+        ]
       }
     ]
   };
@@ -169,7 +190,83 @@
   }
 
   /* ==========================================================================
-     링크 목록 렌더링
+     단일 카드 생성 헬퍼
+     ========================================================================== */
+  function createCardElement(item) {
+    const card = document.createElement('a');
+    card.className = 'link-card';
+    card.id = `link-${item.id}`;
+
+    // URL 유효성 및 보안 검사
+    const isSafe = isSafeUrl(item.url);
+    if (isSafe) {
+      card.href = item.url.trim();
+      // mailto는 같은 창에서 열리도록, 일반 웹 링크는 새 창으로 보안 옵션과 함께 오픈
+      if (/^mailto:/i.test(item.url.trim())) {
+        card.target = '_self';
+      } else {
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer'; // 탭내빙 방지
+      }
+    } else {
+      card.href = '#';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-haspopup', 'dialog');
+    }
+
+    // 1) 대표 이미지 썸네일
+    const thumbWrapper = document.createElement('div');
+    thumbWrapper.className = 'link-thumb-wrapper';
+
+    const img = document.createElement('img');
+    img.className = 'link-thumb';
+    img.src = item.icon;
+    img.alt = item.alt || `${item.title} 아이콘`;
+    img.loading = 'lazy';
+    thumbWrapper.appendChild(img);
+
+    // 2) 텍스트 설명문구 및 부가정보 (XSS 방지: textContent 사용)
+    const content = document.createElement('div');
+    content.className = 'link-content';
+
+    const title = document.createElement('div');
+    title.className = 'link-title';
+    title.textContent = item.title;
+
+    const desc = document.createElement('div');
+    desc.className = 'link-description';
+    desc.textContent = item.desc;
+
+    content.appendChild(title);
+    content.appendChild(desc);
+
+    // 3) 이동 화살표 아이콘
+    const arrow = document.createElement('div');
+    arrow.className = 'link-arrow';
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    `;
+
+    card.appendChild(thumbWrapper);
+    card.appendChild(content);
+    card.appendChild(arrow);
+
+    // 클릭 이벤트 (주소 비어있을 때 토스트 안내)
+    card.addEventListener('click', (e) => {
+      if (!isSafe) {
+        e.preventDefault();
+        showToast(`'${item.title}' 주소를 아직 입력하지 않았습니다. assets/js/config.js 파일에서 입력해주세요.`);
+      }
+    });
+
+    return card;
+  }
+
+  /* ==========================================================================
+     링크 목록 렌더링 (그룹화 지원: Personal, Products)
      ========================================================================== */
   function renderLinks() {
     const container = document.getElementById('linksContainer');
@@ -177,77 +274,38 @@
 
     container.innerHTML = '';
 
-    config.links.forEach((item) => {
-      const card = document.createElement('a');
-      card.className = 'link-card';
-      card.id = `link-${item.id}`;
+    // 그룹 데이터 구조 확인 (config.groups 우선, 없으면 config.links fallback)
+    const groups = config.groups || (config.links ? [{ id: 'default', title: '', links: config.links }] : []);
 
-      // URL 유효성 및 보안 검사
-      const isSafe = isSafeUrl(item.url);
-      if (isSafe) {
-        card.href = item.url.trim();
-        // mailto는 같은 창에서 열리도록, 일반 웹 링크는 새 창으로 보안 옵션과 함께 오픈
-        if (/^mailto:/i.test(item.url.trim())) {
-          card.target = '_self';
-        } else {
-          card.target = '_blank';
-          card.rel = 'noopener noreferrer'; // 탭내빙 방지
-        }
-      } else {
-        card.href = '#';
-        card.setAttribute('role', 'button');
-        card.setAttribute('aria-haspopup', 'dialog');
+    groups.forEach((group) => {
+      const groupWrapper = document.createElement('div');
+      groupWrapper.className = 'link-group';
+      groupWrapper.id = `group-${group.id}`;
+
+      // 그룹 타이틀 헤더가 있는 경우 생성
+      if (group.title && group.title.trim() !== '') {
+        const header = document.createElement('div');
+        header.className = 'group-header';
+
+        const titleBadge = document.createElement('h2');
+        titleBadge.className = 'group-title';
+        titleBadge.textContent = group.title;
+
+        header.appendChild(titleBadge);
+        groupWrapper.appendChild(header);
       }
 
-      // 1) 대표 이미지 썸네일
-      const thumbWrapper = document.createElement('div');
-      thumbWrapper.className = 'link-thumb-wrapper';
+      // 그룹 내 링크 카드 컨테이너
+      const cardsWrapper = document.createElement('div');
+      cardsWrapper.className = 'group-cards';
 
-      const img = document.createElement('img');
-      img.className = 'link-thumb';
-      img.src = item.icon;
-      img.alt = item.alt || `${item.title} 아이콘`;
-      img.loading = 'lazy';
-      thumbWrapper.appendChild(img);
-
-      // 2) 텍스트 설명문구 및 부가정보
-      const content = document.createElement('div');
-      content.className = 'link-content';
-
-      const title = document.createElement('div');
-      title.className = 'link-title';
-      title.textContent = item.title;
-
-      const desc = document.createElement('div');
-      desc.className = 'link-description';
-      desc.textContent = item.desc;
-
-      content.appendChild(title);
-      content.appendChild(desc);
-
-      // 3) 이동 화살표 아이콘
-      const arrow = document.createElement('div');
-      arrow.className = 'link-arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.innerHTML = `
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      `;
-
-      card.appendChild(thumbWrapper);
-      card.appendChild(content);
-      card.appendChild(arrow);
-
-      // 클릭 이벤트 (주소 비어있을 때 토스트 안내)
-      card.addEventListener('click', (e) => {
-        if (!isSafe) {
-          e.preventDefault();
-          showToast(`'${item.title}' 주소를 아직 입력하지 않았습니다. assets/js/config.js 파일에서 입력해주세요.`);
-        }
+      (group.links || []).forEach((item) => {
+        const cardElement = createCardElement(item);
+        cardsWrapper.appendChild(cardElement);
       });
 
-      container.appendChild(card);
+      groupWrapper.appendChild(cardsWrapper);
+      container.appendChild(groupWrapper);
     });
   }
 
@@ -293,9 +351,22 @@
   }
 
   /* ==========================================================================
+     프로필 정보 안전한 동기화 (Anti-XSS textContent 사용)
+     ========================================================================== */
+  function initProfileInfo() {
+    if (config.profile && config.profile.bio) {
+      const bioEl = document.querySelector('.profile-bio');
+      if (bioEl) {
+        bioEl.textContent = config.profile.bio;
+      }
+    }
+  }
+
+  /* ==========================================================================
      초기화
      ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
+    initProfileInfo();
     initNewsModal();
     initProfileSlider();
     renderLinks();
